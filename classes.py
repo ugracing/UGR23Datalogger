@@ -1,0 +1,1 @@
+#Will contain the parent class for sensors
