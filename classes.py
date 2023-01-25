@@ -2,7 +2,7 @@
 
 
 class Sensor:
-    def __init__(CANID, Name, Bytes, Dist, Inst):
+    def __init__(self, CANID, Name, Bytes, Dist, Inst):
         self.CANID = CANID
         self.name = Name
         self.bytes = Bytes
