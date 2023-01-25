@@ -1,8 +1,6 @@
 #Will contain the parent class for sensors
 
-
 class Sensor:
-
     # Constructor of the class Sensor
     def __init__(self, CANID, Name, Bytes, Dist, Inst):
         self.CANID = CANID

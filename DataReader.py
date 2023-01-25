@@ -1,12 +1,12 @@
 #will contain the input function for the csv fle
-sensorList = [] #list of initialized sensors
 
-class Reader:
+class DataReader:
 
   # Constructor with specified sensors
-	def __init__(self, fileName, sensors, path):
+	def __init__(self, fileName, sensors, sensorList, path):
 		self.fileName = fileName #name of file to read
 		self.sensors = sensors #list of sensors
+		self.sensorList = sensorList #list of recognised sensors
 		self.path = path #path to data files
 		# note - update with a list of accepted canIDs and sensors.
 		for s in sensors:
@@ -36,7 +36,7 @@ class Reader:
 		checkSensor = True
 		#check if there's specified sensors
 		if (sensors.isEmpty()):
-			checkSensor = False # False -> no specified
+			checkSensor = False # False -> none specified
 		
 		for line in file:
 			line = line[:-1] #remove \n from the end of each line
@@ -48,16 +48,16 @@ class Reader:
 
 				if (not checkSensor): #if we're not looking for certain sensors
 					
-					if dataPoints[1] not in sensorList: 
+					if dataPoints[1] not in self.sensorList: 
 						self.SensorNotFound(sensor = dataPoints[1])
 						continue
 						
-					sensor = sensorList[dataPoints[1]]
+					sensor = self.sensorList[dataPoints[1]]
 					sensor.addTime([dataPoints[0]]) #implemented in Sensor
 					sensor.addReading([dataPoints[2]]) #implemented in Sensor
 		
 				else: #if we are looking for certain sensors
-					sensor = sensorList[dataPoints[1]]
+					sensor = self.sensorList[dataPoints[1]]
 					sensor.addTime([dataPoints[0]]) #implemented in Sensor
 					sensor.addReading([dataPoints[2]]) #implemented in Sensor
 					
