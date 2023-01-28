@@ -10,18 +10,24 @@ class Sensor:
         self.inst = Inst
         self.data = []
 
-    # Read the 'Dist' attribute and save it 
-    def distributionData(self):
-        distTotal = 0
-        distList = []
+    #Seperate the data into it distribution attributes  
+    def distributeData(self,data):
+        dataBytes = []
+        distData = []
+        for i in range(len(self.bytes)):
+            dataBytes.append(list(data[i*4:(i+1)*4]))
         
-        for i in range(len(self.dist)):
-            distTotal += int(i)
-            distList.append(int(i))
+        for d in range(len(self.dist)):
+            thisDist = []
+            for i in range(int(self.dist[d])):
+                thisDist.append(dataBytes.pop(i))
+                print(dataBytes)
+            distData.append(thisDist)
+        return distData
 
-        distSection = distTotal/distList[0]
+            
 
-        chunks = [self.rawData[j:j+n] for j in range(int(self.bytes))]
+
 
         
 
